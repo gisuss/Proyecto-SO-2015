@@ -31,7 +31,7 @@
 #endif
 
 #ifndef M
-#define M 3
+#define M 15
 #endif
 
 typedef enum {false, true} bool;
