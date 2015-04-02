@@ -43,6 +43,7 @@ typedef struct {
 }Impresora;
 
 Impresora Centro[M];
+FILE *output;
 int marca, Impresoras_libres;
 pthread_mutex_t mutex_tecnico = PTHREAD_MUTEX_INITIALIZER;
 sem_t mutex_impresoras_libres;
@@ -52,6 +53,7 @@ sem_t mutex_Centro;
 
 void inicializar_Centro ();
 void *funcion_Centro ();
+void *Presentando ();
 int requerir_impresora ();
 void liberar_impresora (int id_impresora);
 bool verificar_tinta (int id_impresora);
@@ -62,14 +64,18 @@ int main(void) {
 	/************  DECLARACION DE VARIABLES **************/	
 	
 	pthread_t Usuarios[N];
+	pthread_t Intro;
 	pthread_attr_t atributos;
 	int i, err;
 	
 	/** Inicializa todos los recursos usados por las Impresoras. **/
 	inicializar_Centro ();
 	srand (time(NULL));
-
-	/************  CREACION DE HILOS USUARIO **************/
+	
+	/************  CREACION DE HILO BIENVENIDA *************/
+	pthread_create( &Intro , NULL , Presentando , NULL );
+	
+	/************  CREACION DE HILOS USUARIO  **************/
 	for (i=0;i<N;i++) {
 		
 		pthread_attr_init (&atributos);
@@ -83,25 +89,24 @@ int main(void) {
 	}
 	
 	while (marca > 0);
+	fclose(output);
+	pthread_join(Intro, NULL);
+	system("reset");
 	
-	exit(0);
+	return (0);
 }
 
 void *funcion_Centro () {
 	int id_Impresora;
-	bool band1;
 	
 	id_Impresora = requerir_impresora();
-	band1 = verificar_tinta(id_Impresora);
-	if (band1 == false) {
-		printf("\tNivel de Tinta = %d \t[NO OK]\n", Centro[id_Impresora].tinta);
+	
+	if (!(verificar_tinta(id_Impresora)))
 		recargar_tinta(id_Impresora);
-	}else{
-		printf("\tNivel de Tinta = %d \t[OK]\n", Centro[id_Impresora].tinta);
-	}
+	
 	liberar_impresora(id_Impresora);
 	
-	pthread_exit((void *)"Ya esta\n");
+	pthread_exit(NULL);
 }
 
 void inicializar_Centro () {
@@ -116,8 +121,9 @@ void inicializar_Centro () {
 	sem_init(&mutex_impresoras_libres, 0, 1);
 	Impresoras_libres = M;
 	marca = N;
+	output = fopen("bitacora.out" , "w");
 	
-	printf("\n*** Centro de Impresion y Tecnico Listos para empezar. ***\n\n");
+	fprintf(output, "*** Centro de Impresion y Tecnico Listos para empezar ***\n\n");
 }
 
 int requerir_impresora () {
@@ -135,13 +141,13 @@ int requerir_impresora () {
 		if ((sem_getvalue(&Centro[i].ocupada , &sval) == 0 ) && ( sval == 1 ) ) {
 			band = false;
 			id_impre = i;
+			sem_wait(&Centro[id_impre].ocupada);
 		}
 		i++;
 	}
 	sem_post(&mutex_Centro); //Libera SC Centro
 	
-	sem_wait(&Centro[id_impre].ocupada);
-	printf("[Requerida] Impresora %d.\n", id_impre);
+	fprintf(output, "[Requerida] Impresora %d\n\n", id_impre);
 	sleep(1);
 	
 	return (id_impre);
@@ -157,16 +163,18 @@ void liberar_impresora (int id_impresora) {
 	
 	sem_post(&Centro[id_impresora].ocupada);
 	
-	printf("[Liberada] Impresora %d.\n", id_impresora);
+	fprintf(output, "[Liberada] Impresora %d\n\n", id_impresora);
 }
 
 bool verificar_tinta (int id_impresora) {
 	bool band2;
 	
-	printf("[Verificando] Tinta Impresora %d\n", id_impresora);
+	fprintf(output, "[Verificando] Tinta Impresora %d\n", id_impresora);
 	if (Centro[id_impresora].tinta > 0) {
+		fprintf(output, "\tNivel de Tinta = %d \t[OK]\n\n", Centro[id_impresora].tinta);
 		band2 = true;
 	}else{
+		fprintf(output, "\tNivel de Tinta = %d \t[NO OK]\n\n", Centro[id_impresora].tinta);
 		band2 = false;
 	}
 	
@@ -176,9 +184,54 @@ bool verificar_tinta (int id_impresora) {
 void recargar_tinta (int id_impresora) {
 	pthread_mutex_lock(&mutex_tecnico);
 	
-	printf("[Recargando] Tinta en Impresora: %d.\n\t<Tecnico Trabajando> \t(...)\n\t¡Tinta Recargada.!\n", id_impresora);
+	fprintf(output, "[Recargando] Tinta en Impresora: %d\n\t<Tecnico Trabajando> \t(...)\n\t¡Tinta Recargada.!\n\n", id_impresora);
 	Centro[id_impresora].tinta = 100;
 	sleep(2);
 	
 	pthread_mutex_unlock(&mutex_tecnico);
+}
+
+void *Presentando () {
+	printf("\e[41;1m/**                          *************************                      **/\e[m\n");
+	printf("\e[41;1m/****************************** CENTRO DE IMPRESION **************************/\e[m\n");
+	printf("\e[41;1m/**                          *************************                      **/\e[m\n");
+	printf("\e[41;1m/**                          @Jesus Romero  V-20753800                      **/\e[m\n");
+	printf("\e[41;1m/**                          @Sauli Quirpa  V-25134099                      **/\e[m\n");
+	printf("\e[41;1m/**                          @Yaemil Flores V-23419581                      **/\e[m\n");
+	printf("\e[41;1m/**                                                                         **/\e[m\n");
+	printf("\e[41;1m/**      Toda Informacion, Estructuras, Funciones/Procedimientos            **/\e[m\n");
+	printf("\e[41;1m/**       y Lineas de Codigo contenidas en este proyecto, estan             **/\e[m\n");
+	printf("\e[41;1m/**    protegidas mediante derechos de autor. Cualquier distribucion,       **/\e[m\n");
+	printf("\e[41;1m/**       reproduccion y modificacion para fines personales sin el          **/\e[m\n");
+	printf("\e[41;1m/**          debido consentimiento de los respectivos miembros              **/\e[m\n");
+	printf("\e[41;1m/**                  y compañia, sera objeto de sancion.                    **/\e[m\n");
+	printf("\e[41;1m/**                                                                         **/\e[m\n");
+	printf("\e[41;1m/**     Copyright © 2014-2015 SISTEMAS OPERATIVOS™, All Rights Reserved.    **/\e[m\n");
+	printf("\e[41;1m/*****************************************************************************/\e[m\n");
+		
+	sleep(5);
+	system("reset");
+	
+	printf("\n\n\n\n\n\n\n\t\t\t             \e[42;1mC\e[m A R G A N D O             \n\n");
+	sleep(3);
+	system("clear");
+	printf("\n\n\n\n\n\n\n\t\t\t           \e[36m<\e[m \e[42;1mC A\e[m R G A N D O \e[36m>\e[m           \n\n");
+	sleep(3);
+	system("clear");
+	printf("\n\n\n\n\n\n\n\t\t\t         \e[36m< <\e[m \e[42;1mC A R\e[m G A N D O \e[36m> >\e[m         \n\n");
+	sleep(3);
+	system("clear");
+	printf("\n\n\n\n\n\n\n\t\t\t       \e[36m< < <\e[m \e[42;1mC A R G\e[m A N D O \e[36m> > >\e[m       \n\n");
+	sleep(3);
+	system("clear");
+	printf("\n\n\n\n\n\n\n\t\t\t     \e[36m< < < <\e[m \e[42;1mC A R G A\e[m N D O \e[36m> > > >\e[m     \n\n");
+	sleep(3);
+	system("clear");
+	printf("\n\n\n\n\n\n\n\t\t\t   \e[36m< < < < <\e[m \e[42;1mC A R G A N\e[m D O \e[36m> > > > >\e[m   \n\n");
+	sleep(3);
+	system("clear");
+	printf("\n\n\n\n\n\n\n\t\t\t \e[36m< < < < < <\e[m \e[42;1mC A R G A N D O\e[m \e[36m> > > > > >\e[m \n\n");
+	sleep(4);
+	
+	pthread_exit(NULL);
 }
