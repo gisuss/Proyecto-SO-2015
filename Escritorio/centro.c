@@ -192,46 +192,98 @@ void recargar_tinta (int id_impresora) {
 }
 
 void *Presentando () {
-	printf("\e[41;1m/**                          *************************                      **/\e[m\n");
-	printf("\e[41;1m/****************************** CENTRO DE IMPRESION **************************/\e[m\n");
-	printf("\e[41;1m/**                          *************************                      **/\e[m\n");
-	printf("\e[41;1m/**                          @Jesus Romero  V-20753800                      **/\e[m\n");
-	printf("\e[41;1m/**                          @Sauli Quirpa  V-25134099                      **/\e[m\n");
-	printf("\e[41;1m/**                          @Yaemil Flores V-23419581                      **/\e[m\n");
-	printf("\e[41;1m/**                                                                         **/\e[m\n");
-	printf("\e[41;1m/**      Toda Informacion, Estructuras, Funciones/Procedimientos            **/\e[m\n");
-	printf("\e[41;1m/**       y Lineas de Codigo contenidas en este proyecto, estan             **/\e[m\n");
-	printf("\e[41;1m/**    protegidas mediante derechos de autor. Cualquier distribucion,       **/\e[m\n");
-	printf("\e[41;1m/**       reproduccion y modificacion para fines personales sin el          **/\e[m\n");
-	printf("\e[41;1m/**          debido consentimiento de los respectivos miembros              **/\e[m\n");
-	printf("\e[41;1m/**                  y compañia, sera objeto de sancion.                    **/\e[m\n");
-	printf("\e[41;1m/**                                                                         **/\e[m\n");
-	printf("\e[41;1m/**     Copyright © 2014-2015 SISTEMAS OPERATIVOS™, All Rights Reserved.    **/\e[m\n");
-	printf("\e[41;1m/*****************************************************************************/\e[m\n");
-		
+	printf("\e[43;1m/**                          *************************                      **/\e[m\n");
+	printf("\e[43;1m/****************************** CENTRO DE IMPRESION **************************/\e[m\n");
+	printf("\e[43;1m/**                          *************************                      **/\e[m\n");
+	printf("\e[43;1m/**                          @Jesus Romero  V-20753800                      **/\e[m\n");
+	printf("\e[43;1m/**                          @Sauli Quirpa  V-25134099                      **/\e[m\n");
+	printf("\e[43;1m/**                          @Yaemil Flores V-23419581                      **/\e[m\n");
+	printf("\e[43;1m/**                                                                         **/\e[m\n");
+	printf("\e[43;1m/**      Toda Informacion, Estructuras, Funciones/Procedimientos            **/\e[m\n");
+	printf("\e[43;1m/**       y Lineas de Codigo contenidas en este proyecto, estan             **/\e[m\n");
+	printf("\e[43;1m/**    protegidas mediante derechos de autor. Cualquier distribucion,       **/\e[m\n");
+	printf("\e[43;1m/**       reproduccion y modificacion para fines personales sin el          **/\e[m\n");
+	printf("\e[43;1m/**          debido consentimiento de los respectivos miembros              **/\e[m\n");
+	printf("\e[43;1m/**                  y compañia, sera objeto de sancion.                    **/\e[m\n");
+	printf("\e[43;1m/**                                                                         **/\e[m\n");
+	printf("\e[43;1m/**     Copyright © 2014-2015 SISTEMAS OPERATIVOS™, All Rights Reserved.    **/\e[m\n");
+	printf("\e[43;1m/*****************************************************************************/\e[m\n");
+	
 	sleep(5);
 	system("reset");
 	
-	printf("\n\n\n\n\n\n\n\t\t\t             \e[42;1mC\e[m A R G A N D O             \n\n");
-	sleep(3);
-	system("clear");
-	printf("\n\n\n\n\n\n\n\t\t\t           \e[36m<\e[m \e[42;1mC A\e[m R G A N D O \e[36m>\e[m           \n\n");
-	sleep(3);
-	system("clear");
-	printf("\n\n\n\n\n\n\n\t\t\t         \e[36m< <\e[m \e[42;1mC A R\e[m G A N D O \e[36m> >\e[m         \n\n");
-	sleep(3);
-	system("clear");
-	printf("\n\n\n\n\n\n\n\t\t\t       \e[36m< < <\e[m \e[42;1mC A R G\e[m A N D O \e[36m> > >\e[m       \n\n");
-	sleep(3);
-	system("clear");
-	printf("\n\n\n\n\n\n\n\t\t\t     \e[36m< < < <\e[m \e[42;1mC A R G A\e[m N D O \e[36m> > > >\e[m     \n\n");
-	sleep(3);
-	system("clear");
-	printf("\n\n\n\n\n\n\n\t\t\t   \e[36m< < < < <\e[m \e[42;1mC A R G A N\e[m D O \e[36m> > > > >\e[m   \n\n");
-	sleep(3);
-	system("clear");
-	printf("\n\n\n\n\n\n\n\t\t\t \e[36m< < < < < <\e[m \e[42;1mC A R G A N D O\e[m \e[36m> > > > > >\e[m \n\n");
-	sleep(4);
+	if (M == 15) {
+		
+		printf("\n\n\n\n\n\n\n\t\t\t             \e[36m<\e[m \e[42;1mC\e[m A R G A N D O \e[36m>\e[m           \n\n");
+		sleep(3);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t           \e[36m< <\e[m \e[42;1mC A\e[m R G A N D O \e[36m> >\e[m         \n\n");
+		sleep(3);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t         \e[36m< < <\e[m \e[42;1mC A R\e[m G A N D O \e[36m> > >\e[m       \n\n");
+		sleep(3);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t       \e[36m< < < <\e[m \e[42;1mC A R G\e[m A N D O \e[36m> > > >\e[m     \n\n");
+		sleep(3);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t     \e[36m< < < < <\e[m \e[42;1mC A R G A\e[m N D O \e[36m> > > > >\e[m   \n\n");
+		sleep(3);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t   \e[36m< < < < < <\e[m \e[42;1mC A R G A N\e[m D O \e[36m> > > > > >\e[m \n\n");
+		sleep(3);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t \e[36m< < < < < < <\e[m \e[42;1mC A R G A N D O\e[m \e[36m> > > > > > >\e[m \n\n");
+		sleep(4);
+		
+	}else if (M > 0 && M <= 5) {
+	
+		printf("\n\n\n\n\n\n\n\t\t\t             \e[36m<\e[m \e[42;1mC\e[m A R G A N D O \e[36m>\e[m           \n\n");
+		sleep(12);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t           \e[36m< <\e[m \e[42;1mC A\e[m R G A N D O \e[36m> >\e[m         \n\n");
+		sleep(12);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t         \e[36m< < <\e[m \e[42;1mC A R\e[m G A N D O \e[36m> > >\e[m       \n\n");
+		sleep(12);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t       \e[36m< < < <\e[m \e[42;1mC A R G\e[m A N D O \e[36m> > > >\e[m     \n\n");
+		sleep(12);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t     \e[36m< < < < <\e[m \e[42;1mC A R G A\e[m N D O \e[36m> > > > >\e[m   \n\n");
+		sleep(12);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t   \e[36m< < < < < <\e[m \e[42;1mC A R G A N\e[m D O \e[36m> > > > > >\e[m \n\n");
+		sleep(12);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t   \e[36m< < < < < < <\e[m \e[42;1mC A R G A N D\e[m O \e[36m> > > > > > >\e[m \n\n");
+		sleep(12);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t \e[36m< < < < < < <\e[m \e[42;1mC A R G A N D O\e[m \e[36m> > > > > > >\e[m \n\n");
+		sleep(13);
+		
+	}else if (M > 5 && M < 15) {
+		
+		printf("\n\n\n\n\n\n\n\t\t\t             \e[36m<\e[m \e[42;1mC\e[m A R G A N D O \e[36m>\e[m           \n\n");
+		sleep(9);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t           \e[36m< <\e[m \e[42;1mC A\e[m R G A N D O \e[36m> >\e[m         \n\n");
+		sleep(9);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t         \e[36m< < <\e[m \e[42;1mC A R\e[m G A N D O \e[36m> > >\e[m       \n\n");
+		sleep(9);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t       \e[36m< < < <\e[m \e[42;1mC A R G\e[m A N D O \e[36m> > > >\e[m     \n\n");
+		sleep(9);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t     \e[36m< < < < <\e[m \e[42;1mC A R G A\e[m N D O \e[36m> > > > >\e[m   \n\n");
+		sleep(9);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t   \e[36m< < < < < <\e[m \e[42;1mC A R G A N\e[m D O \e[36m> > > > > >\e[m \n\n");
+		sleep(9);
+		system("clear");
+		printf("\n\n\n\n\n\n\n\t\t\t \e[36m< < < < < < <\e[m \e[42;1mC A R G A N D O\e[m \e[36m> > > > > > >\e[m \n\n");
+		sleep(7);
+	}
 	
 	pthread_exit(NULL);
 }
